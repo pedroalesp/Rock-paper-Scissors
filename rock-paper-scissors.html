@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
+</head>
+    <style>
+        body {
+            font-family: 'MuseoModerno', cursive;
+            margin: 0;
+        }
+        .playground {
+            height: 100vh;
+            background-color: #14213d;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+        }
+        .playground__title {
+            color: #fca311;
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        .playground__container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border: 5px solid #fca311;
+            border-radius: 54px;
+            width: 400px;
+            height: 470px;
+        }
+        .playground__container--items {
+            height: 8em;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .button {
+            font-family: 'MuseoModerno', cursive;
+            font-size: 23px;
+            padding: 5px 20px;
+            border: 3px solid #e5e5e5;
+            border-radius: 22px;
+            outline: none;
+            cursor: pointer;
+            transition: 300ms;
+            transform-origin: center top;
+        }
+        .button:hover {
+            transform: scale(1.5);
+        }
+        .button:focus {
+            background-color: #aacc00;
+        }
+        .button:hover ~.button {
+            transform: translate3d(0, 20px, 0);
+        }
+        .playground__container--items2 {
+            margin-bottom: 20px;
+        }
+        .action {
+            transform-origin: center bottom;
+        }
+        .action:hover ~ .action {
+            transform: translate3d(20px, 0, 0);
+        }
+        #winner {
+            z-index: 2;
+            position: fixed;
+            border: 2px;
+            border-radius: 30px;
+            background-color: #2a9d8f;
+            margin: 0;
+            font-size: 80px;
+        }
+    </style>
+<body>
+    <section class="playground">
+        <h2 class="playground__title">READY TO PLAY?</h2>
+            <div class="playground__container">
+                <p>Choose your option</p>
+                <div class="playground__container--items">
+                    <p id="winner"></p>
+                    <input type="button" class="button" value="Rock" id="rock">
+                    <input type="button" class="button" value="Paper" id="paper">
+                    <input type="button" class="button" value="Scissors" id="scissors"><br>
+                </div>
+                <div class="playground__container--items2">
+                    <input type="button" class="button action" value="Play!" id="run">
+                    <input type="button" class="button action" value="Try again!" id="reset">
+                </div>
+            </div>
+    </section>
+    <script>
+        var user;
+        var pc = Math.floor(Math.random()* (3 + 1 - 1) + 1);
+        var rock = 1;
+        var paper =2;
+        var scissors = 3;
+
+        var rockButton = document.getElementById("rock");
+        var paperButton = document.getElementById("paper");
+        var scissorsButton = document.getElementById("scissors");
+        var playButton = document.getElementById("run");
+        var resetButton = document.getElementById("reset");
+        var finalWinner = document.getElementById("winner");
+
+        rockButton.addEventListener("click", optionRock);
+        paperButton.addEventListener("click", optionPaper);
+        scissorsButton.addEventListener("click", optionScissors);
+        playButton.addEventListener("click", play);
+        resetButton.addEventListener("click", resetGame);
+
+        function optionRock() {
+            user = rock;
+        }
+        function optionPaper() {
+            user = paper;
+        }
+        function optionScissors() {
+            user = scissors;
+        }
+
+        function resetGame () {
+            pc = Math.floor(Math.random()* (3 + 1 - 1) + 1);
+            finalWinner.innerHTML= "";
+        }
+
+        function play() {
+            if (user == pc) {
+                finalWinner.innerHTML= "TIE";
+                 } else if (user == rock && pc == scissors || user == paper && pc == rock || user == scissors && pc == paper) {
+                    finalWinner.innerHTML= "You win!"
+                } else {
+                finalWinner.innerHTML= "PC wins :(";
+                }
+        }
+    </script>
+</body>
+</html>
