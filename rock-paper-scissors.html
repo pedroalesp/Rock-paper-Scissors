@@ -136,13 +136,29 @@
         }
 
         function play() { //Mi función principal, primero establecemos que si user y pc tienen el mismo valor, será un empate.
-            if (user == pc) {
-                finalWinner.innerHTML= "TIE";
-                 } else if (user == rock && pc == scissors || user == paper && pc == rock || user == scissors && pc == paper) {
-                    finalWinner.innerHTML= "You win!"// si son diferentes, el aloritmo pasa a revisar si se cumple alguna de las condiciones de arriba
-                } else {                             // ya que usamos el or (||) si hay al menos una falsa, no se cumplirá y pasará al siguiente condicinal
-                finalWinner.innerHTML= "PC wins :("; // resaltar que las condiciones del else if son las 3 posibilidad en que el usuario puede ganar.
-                }
+            // if (user == pc) {
+            //     finalWinner.innerHTML= "TIE";
+            //      } else if (user == rock && pc == scissors || user == paper && pc == rock || user == scissors && pc == paper) {
+            //         finalWinner.innerHTML= "You win!"// si son diferentes, el aloritmo pasa a revisar si se cumple alguna de las condiciones de arriba
+            //     } else {                             // ya que usamos el or (||) si hay al menos una falsa, no se cumplirá y pasará al siguiente condicinal
+            //     finalWinner.innerHTML= "PC wins :("; // resaltar que las condiciones del else if son las 3 posibilidad en que el usuario puede ganar.
+            //     }
+
+            switch (true) { // Se usa TRUE para que se ejecute la condición que sea verdadera
+
+                case (user === pc): //Caso EMPATE, si el usuario y la pc tienen el mismo valor
+                 console.log("tie");
+                 break;
+
+                case (user == rock && pc == scissors || user == paper && pc == rock || user == scissors && pc == paper): 
+                console.log("you win"); //En este caso se leen todas las condiciones que le dan la victoria al usuario, si se cumple una
+                break;                  // hace que se ejecute 
+
+                default:   //Si no se cumple n inguna de las anteriores, por defecto gana la PC
+                console.log("pc wins :(");
+            }
+
+ 
         }
     </script>
 </body>
