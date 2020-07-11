@@ -4,16 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
     <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
 </head>
     <style>
+        @font-face {
+        font-family: 'icomoon';
+        src:  url('./fonts/icomoon.eot?yezat3');
+        src:  url('./fonts/icomoon.eot?yezat3#iefix') format('embedded-opentype'),
+        url('./fonts/icomoon.ttf?yezat3') format('truetype'),
+        url('./fonts/icomoon.woff?yezat3') format('woff'),
+        url('./fonts/icomoon.svg?yezat3#icomoon') format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-instagram:before {
+    content: "\ea92";
+  }
+  .icon-twitter:before {
+    content: "\ea96";
+  }
+  .icon-github:before {
+    content: "\eab0";
+  }
         body {
             font-family: 'MuseoModerno', cursive;
             margin: 0;
+            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+        }
+        .dashboard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 5%;
+        right: 10%;
+        border: 5px solid #fca311;
+        border-radius: 63px;
+        width: 15%;
+        }
+        .dashboard__score {
+            margin: 0;
         }
         .playground {
-            height: 100vh;
-            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            height: 97vh;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -65,9 +116,27 @@
         .playground__container--items2 {
             margin-bottom: 20px;
         }
+        .footer {
+            padding-left: 1em;
+            margin: 0;
+            color: #e5e5e5;
+            display: flex;
+            align-items: center;
+        }
+        .social-icon {
+        font-size: 2em;
+        color: #e5e5e5;
+        text-decoration: none;
+        /* background-size: 50px 50px; */
+        margin: 0 10px;
+        }
     </style>
 <body>
     <section class="playground">
+        <div class="dashboard">
+            <p class="dashboard__score">YOU: <span id="user"></span></p>
+            <P class="dashboard__score">PC: <span id="pc"></span></P>
+        </div>
         <h2 class="playground__title">READY TO PLAY?</h2>
             <div class="playground__container">
                 <p>Choose your option</p>
@@ -78,71 +147,21 @@
                 </div>
             </div>
     </section>
+    <footer class="footer">
+        Made with love by Pedro Silva
+        <a href="https://www.instagram.com/pedroalej_" class="social-icon" target="_blank">
+            <i class="icon-instagram"></i>
+        </a>
+        <a href="https://github.com/pedroalesp" class="social-icon" target="_blank">
+            <i class="icon-github"></i>
+        </a>
+        <a href="https://twitter.com/pedroale_sp" class="social-icon" target="_blank">
+            <i class="icon-twitter"></i>
+        </a>
+    </footer>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     <script src="game.js"></script>
 
-    <!-- <script>
-        var user; //Variable del usuario aun no especificada
-        var pc = Math.floor(Math.random()* (3 + 1 - 1) + 1);//La función Math.floor asigna un número aleatorio entre 1 y 3 a la var pc
-        var rock = 1;
-        var paper =2;
-        var scissors = 3;
-
-        var rockButton = document.getElementById("rock"); //Todas estas variables toman la información de los botones del HTML
-        var paperButton = document.getElementById("paper");
-        var scissorsButton = document.getElementById("scissors");
-        var playButton = document.getElementById("run");
-        var resetButton = document.getElementById("reset");
-        var finalWinner = document.getElementById("winner");
-
-        rockButton.addEventListener("click", optionRock);// Los listeners de eventos disparan las funciones al hacer click sobre los bonotes
-        paperButton.addEventListener("click", optionPaper); // El objetivo de esas funciones es asignarun valor al usuario
-        scissorsButton.addEventListener("click", optionScissors);
-        playButton.addEventListener("click", play);// la función play() dispara acciona todo el algoritmo
-        resetButton.addEventListener("click", resetGame);//la  función resetGame() le da otro valor a la var pc para repetir el juego
-
-        function optionRock() { //funciones para signar el valor al usuario anteriormente mencionadas
-            user = rock;
-        }
-        function optionPaper() {
-            user = paper;
-        }
-        function optionScissors() {
-            user = scissors;
-        }
-
-        function resetGame () {
-            pc = Math.floor(Math.random()* (3 + 1 - 1) + 1); //función para darle repetir el juego asignando otro valor aleatorio a pc
-            finalWinner.innerHTML= "";
-        }
-
-        function play() { //Mi función principal, primero establecemos que si user y pc tienen el mismo valor, será un empate.
-            // if (user == pc) {
-            //     finalWinner.innerHTML= "TIE";
-            //      } else if (user == rock && pc == scissors || user == paper && pc == rock || user == scissors && pc == paper) {
-            //         finalWinner.innerHTML= "You win!"// si son diferentes, el aloritmo pasa a revisar si se cumple alguna de las condiciones de arriba
-            //     } else {                             // ya que usamos el or (||) si hay al menos una falsa, no se cumplirá y pasará al siguiente condicinal
-            //     finalWinner.innerHTML= "PC wins :("; // resaltar que las condiciones del else if son las 3 posibilidad en que el usuario puede ganar.
-            //     }
-
-            switch (true) { // Se usa TRUE para que se ejecute la condición que sea verdadera
-
-                case (user === pc): //Caso EMPATE, si el usuario y la pc tienen el mismo valor
-                 console.log("tie");
-                 break;
-
-                case (user == rock && pc == scissors || user == paper && pc == rock || user == scissors && pc == paper): 
-                console.log("you win"); //En este caso se leen todas las condiciones que le dan la victoria al usuario, si se cumple una
-                break;                  // hace que se ejecute 
-
-                default:   //Si no se cumple n inguna de las anteriores, por defecto gana la PC
-                console.log("pc wins :(");
-            }
-
- 
-        }
-    </script> -->
 </body>
 </html>

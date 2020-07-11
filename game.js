@@ -1,6 +1,11 @@
-const rock = document.getElementById("rock"); //Todas estas const toman la información de los botones del HTML
-const paper = document.getElementById("paper");
-const scissors = document.getElementById("scissors");
+const rock = document.getElementById("rock") //Todas estas const toman la información de los botones del HTML
+const paper = document.getElementById("paper")
+const scissors = document.getElementById("scissors")
+const userScore = document.getElementById('user')
+const pcScore = document.getElementById('pc')
+
+userScore.innerHTML = 0
+pcScore.innerHTML = 0
 
 class Game {
     constructor()  {
@@ -9,12 +14,12 @@ class Game {
     }
 
     iniciar() {
-        
         this.options = {
             rock,
             paper,
             scissors
         }
+
     }
     
     eventosDeUsuario() {
@@ -75,21 +80,22 @@ class Game {
         let usuarioFinal = this.cambiarNumeroAOpcion(usuario)
         let pcFinal = this.cambiarPcAOpcion(pc)
         swal('TIE!', `You chose ${usuarioFinal} and pc chose ${pcFinal}`, 'error')
-           // .then(this.inicializar.bind(this))//El this puede estar bindeado aqui o en el constructor cmo en los casos anteriores
     }
 
     ganaste (usuario, pc) {
         let usuarioFinal = this.cambiarNumeroAOpcion(usuario)
         let pcFinal = this.cambiarPcAOpcion(pc)
+        userScore.innerHTML++
         swal('YOU WIN!', `You chose ${usuarioFinal} and pc chose ${pcFinal}`, 'success')
-           // .then(this.inicializar.bind(this))//El this puede estar bindeado aqui o en el constructor cmo en los casos anteriores
+            
     }
 
     perdiste (usuario, pc) {
         let usuarioFinal = this.cambiarNumeroAOpcion(usuario)
         let pcFinal = this.cambiarPcAOpcion(pc)
+        pcScore.innerHTML++
         swal('YOU LOSE :(', `You chose ${usuarioFinal} and pc chose ${pcFinal}`, 'error')
-           // .then(this.inicializar.bind(this))//El this puede estar bindeado aqui o en el constructor cmo en los casos anteriores
+           
     }
 }
 
