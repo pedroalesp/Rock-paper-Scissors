@@ -23,7 +23,7 @@
   [class^="icon-"], [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
-    speak: none;
+    
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -53,7 +53,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        position: fixed;
+        position: absolute;
         top: 5%;
         right: 10%;
         border: 5px solid #fca311;
@@ -130,6 +130,70 @@
         /* background-size: 50px 50px; */
         margin: 0 10px;
         }
+
+        @media screen and (max-width: 1024px) {
+            .playground__container p {
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 768px){
+            .dashboard {
+                top: 14%;
+                left: 37%;
+                right: 10%;
+                width: 25%;
+            }
+            .playground__container {
+                width: 50vw;
+                height: 62vh;
+                position: absolute;
+                top: 30%;
+            }
+            .playground__title {
+                position: absolute;
+                top: 0%;
+                left: 23%;
+            }
+        }
+
+        @media screen and (max-width: 480px){
+        .playground__title {
+            position: absolute;
+            top: 6%;
+            font-size: 1.3em;
+            left: 18%;
+        }
+        .playground__container {
+            position: absolute;
+            top: 34%;
+        }
+        .playground__container p {
+            text-align: center;
+        }
+        .dashboard {
+            top: 19%;
+            left: 30%;
+            right: 10%;
+            width: 38%;
+        }
+    }
+
+    @media screen and (max-width: 360px){
+        .playground__title {
+            top: 8%;
+            font-size: 1em;
+            left: 14%;
+        }
+        .dashboard {
+            font-size: .9em;
+            left: 29%;
+            width: 42%;
+        }
+        .playground__container {
+            width: 35vh;
+        }
+    }
     </style>
 <body>
     <section class="playground">
